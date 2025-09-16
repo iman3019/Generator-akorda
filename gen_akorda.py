@@ -18,23 +18,37 @@ h -> H, D, F#'''
 tones = ['C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#', 'A', 'A#', 'H']
 
 print()
-print('********')
+print('*'*30)
+print('Ganarator akorda')
+print()
+    
 start_tone = input('Upisite ton za koji zelite saznati sasatv durskog i molskog akorda: ')
-#for i in tones:
-tone_index = tones.index(start_tone,0,12)
-if tone_index + 4 >= len(tones):
-    dur_1 = tones[tone_index + 4 - len(tones)]
-    dur_2 = tones[tone_index + 7 - len(tones)]
-    mol_1 = tones[tone_index + 3 - len(tones)]
-    mol_2 = tones[tone_index + 7 - len(tones)]
-elif tone_index + 7 >= len(tones):
-    dur_1 = tones[tone_index + 4]
-    dur_2 = tones[tone_index + 7 - len(tones)]
-    mol_1 = tones[tone_index + 3]
-else:
-    dur_1 = tones[tone_index + 4]
-    dur_2 = tones[tone_index + 7]
-    mol_1 = tones[tone_index + 3]
+i = 0
+for i in tones:
+    if start_tone == tones[i]:
+        
+        tone_index = tones.index(start_tone,0,12)
+            if tone_index + 4 >= len(tones):
+                major_1 = tones[tone_index + 4 - len(tones)]
+                major_2 = tones[tone_index + 7 - len(tones)]
+                minor_1 = tones[tone_index + 3 - len(tones)]
+               
+            elif tone_index + 7 >= len(tones):
+                major_1 = tones[tone_index + 4]
+                major_2 = tones[tone_index + 7 - len(tones)]
+                minor_1 = tones[tone_index + 3]
+            else:
+                major_1 = tones[tone_index + 4]
+                major_2 = tones[tone_index + 7]
+                minor_1 = tones[tone_index + 3]
+    elif:
+        print('Niste upisali tocan ton.')
+        input('Za nastavak pritisnite ENTER.')
+        continue
+    else:
+        exit = input('Za izlazak iz generatora pritisnite 0: .')
+        if exit == 0:
+            break
 
 print()
 print(f'{tones[tone_index].upper()} -> {tones[tone_index].upper()}, {dur_1}, {dur_2}')
