@@ -15,34 +15,61 @@ D mol (0, 3, 7) ili se pise samo d -> D, F, A
 H -> H, D#, F#
 h -> H, D, F#'''
 
+import os
+
 tones = ['C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#', 'A', 'A#', 'H']
 
-print()
-print('********')
-start_tone = input('Upisite ton za koji zelite saznati sasatv durskog i molskog akorda: ')
-#for i in tones:
-tone_index = tones.index(start_tone,0,12)
-if tone_index + 4 >= len(tones):
-    dur_1 = tones[tone_index + 4 - len(tones)]
-    dur_2 = tones[tone_index + 7 - len(tones)]
-    mol_1 = tones[tone_index + 3 - len(tones)]
-    mol_2 = tones[tone_index + 7 - len(tones)]
-elif tone_index + 7 >= len(tones):
-    dur_1 = tones[tone_index + 4]
-    dur_2 = tones[tone_index + 7 - len(tones)]
-    mol_1 = tones[tone_index + 3]
-else:
-    dur_1 = tones[tone_index + 4]
-    dur_2 = tones[tone_index + 7]
-    mol_1 = tones[tone_index + 3]
+low_tones = []
+while True:
 
-print()
-print(f'{tones[tone_index].upper()} -> {tones[tone_index].upper()}, {dur_1}, {dur_2}')
-print(f'{tones[tone_index].lower()} -> {tones[tone_index].upper()}, {mol_1}, {dur_2}')
+    os.system('cls')
+    print()
+    print('# '*20)
+    print()
+    print('\tGenerator akorda')
+    print()
+    print('Ljestvica: ', end="")
+    for tone in range(len(tones)):
+        print(tones[tone], end=" ")
+    print()
+    print()
 
-print()
+    start_tone = input('Upisite ton iz ljestvice za koji zelite saznati tonove durskog i molskog akorda: ')
+    start_tone = start_tone.lower()
+    for tone in tones:
+        tone = tone.lower()
+        
+        low_tones.append(tone)
 
-#print(dur_1, dur_2)
-#print(mol_1, mol_2)
-#print(index)
-#if len(tones)-tones[index]
+    if low_tones.count(start_tone) == 0:
+        print('Niste unijeli odgovarajući ton. Molimo ponovite unos.')
+        input('Za nastavak pritisnite ENTER.')
+        continue
+    else:
+        tone_index = low_tones.index(start_tone,0,12)
+    if tone_index + 4 > len(tones):
+        major_1 = tones[tone_index + 4 - len(tones)]
+        major_2 = tones[tone_index + 7 - len(tones)]
+        minor_1 = tones[tone_index + 3 - len(tones)]
+            
+    elif tone_index + 7 >=len(tones):
+        major_1 = tones[tone_index + 4]
+        major_2 = tones[tone_index + 7 - len(tones)]
+        minor_1 = tones[tone_index + 3]
+
+    elif tone_index < 5:
+        major_1 = tones[tone_index + 4]
+        major_2 = tones[tone_index + 7]
+        minor_1 = tones[tone_index + 3]
+        
+    print()
+    print(f'{tones[tone_index].upper()} -> {tones[tone_index].upper()}, {major_1}, {major_2}')
+    print(f'{tones[tone_index].lower()} -> {tones[tone_index].upper()}, {minor_1}, {major_2}')
+    print()
+        
+    new_chord = input('Zelite li ispis novog akorda? (Da/Ne): ')
+    if new_chord.lower() != 'da':
+        break
+print()
+print('Pozdrav, ugodno muziciranje!')
+print()
